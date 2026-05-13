@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerCompass</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="logo">Career<span>Compass</span></div>
+  <ul>
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#quiz-section">Quiz</a></li>
+    <li><a href="#register">Register</a></li>
+    <li><a href="#quiz-section" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <h1>Confused After 12th?<em>We'll Find Your Path.</em></h1>
+  <p>Take a short aptitude quiz. Explore 50+ courses. Get AI-powered career suggestions built just for you.</p>
+  <div class="hero-btns">
+    <button class="btn-white" onclick="document.getElementById('quiz-section').scrollIntoView({behavior:'smooth'})">Take the Quiz</button>
+    <button class="btn-ghost" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Browse Courses</button>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Courses Listed</div></div>
+  <div class="stat"><div class="stat-num">10K+</div><div class="stat-label">Students Guided</div></div>
+  <div class="stat"><div class="stat-num">10</div><div class="stat-label">Quiz Questions</div></div>
+  <div class="stat"><div class="stat-num">98%</div><div class="stat-label">Satisfaction Rate</div></div>
+</div>
+
+<section class="courses-sec" id="courses">
+  <div class="section-header">
+    <span class="section-badge">EXPLORE</span>
+    <h2 class="section-title">Discover Your Courses</h2>
+    <p class="section-sub">Click any course card to select it. Filter by your stream below.</p>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterCourses('all', this)">All Courses</button>
+    <button class="filter-btn" onclick="filterCourses('science', this)">Science</button>
+    <button class="filter-btn" onclick="filterCourses('commerce', this)">Commerce</button>
+    <button class="filter-btn" onclick="filterCourses('arts', this)">Arts</button>
+    <button class="filter-btn" onclick="filterCourses('tech', this)">Technology</button>
+  </div>
+  <div class="courses-grid" id="coursesGrid"></div>
+</section>
+
+<section class="quiz-section" id="quiz-section">
+  <div class="quiz-inner">
+    <div class="section-header">
+      <span class="section-badge">APTITUDE TEST</span>
+      <h2 class="section-title">Find Your Career Path</h2>
+      <p class="section-sub">Answer all 10 questions honestly for the best result.</p>
+    </div>
+    <div class="quiz-wrapper" id="quizWrapper">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:10%"></div></div>
+      <div class="q-number" id="qNum">Question 1 of 10</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="qOptions"></div>
+      <div class="quiz-nav">
+        <button class="btn-yellow" onclick="nextQuestion()" id="nextBtn" disabled>Next</button>
+        <span class="quiz-progress-text" id="qProgressText">0 / 10 answered</span>
+      </div>
+    </div>
+    <div class="result-box" id="resultBox">
+      <h3 id="resultTitle"></h3>
+      <p id="resultDesc"></p>
+      <div class="suggestion-chips" id="resultChips"></div>
+      <button class="btn-yellow" onclick="restartQuiz()">Retake Quiz</button>
+    </div>
+  </div>
+</section>
+
+<section class="register-sec" id="register">
+  <div class="section-header">
+    <span class="section-badge" style="background:linear-gradient(135deg,#6c2fe8,#e8297a);color:white">FREE REGISTRATION</span>
+    <h2 class="section-title">Get Your Full AI Report</h2>
+    <p class="section-sub">Register to receive personalized career roadmaps and counsellor sessions.</p>
+  </div>
+  <div class="form-card">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" placeholder="Riya">
+        <div class="error-msg" id="fname-err">Enter your first name.</div>
+      </div>
+      <div class="form-group">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" placeholder="Sharma">
+        <div class="error-msg" id="lname-err">Enter your last name.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email Address</label>
+      <input type="email" id="email" placeholder="riya@example.com">
+      <div class="error-msg" id="email-err">Enter a valid email.</div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" placeholder="10-digit number">
+      <div class="error-msg" id="phone-err">Enter a valid 10-digit number.</div>
+    </div>
+    <div class="form-group">
+      <label for="stream">Your 12th Stream</label>
+      <select id="stream">
+        <option value="">-- Select Stream --</option>
+        <option>Science (PCM)</option>
+        <option>Science (PCB)</option>
+        <option>Commerce</option>
+        <option>Arts / Humanities</option>
+        <option>Vocational</option>
+      </select>
+      <div class="error-msg" id="stream-err">Please select your stream.</div>
+    </div>
+    <div class="form-group">
+      <label for="percent">12th Percentage / Expected %</label>
+      <input type="number" id="percent" placeholder="e.g. 85" min="0" max="100">
+      <div class="error-msg" id="percent-err">Enter a valid percentage (0-100).</div>
+    </div>
+    <button class="btn-submit" onclick="validateForm()">Register & Get My Report</button>
+    <div class="success-msg" id="successMsg">You're registered! Check your email for next steps.</div>
+  </div>
+</section>
+
+<footer>
+  <strong>CareerCompass</strong>
+  <div class="footer-links">
+    <a href="#courses">Courses</a>
+    <a href="#quiz-section">Take Quiz</a>
+    <a href="#register">Register</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+  <p>© 2025 CareerCompass · Web Application Development</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
